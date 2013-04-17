@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Group xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		 xmlns:s="library://ns.adobe.com/flex/spark" 
+		 xmlns:mx="library://ns.adobe.com/flex/mx" 
+		 xmlns:spicefactory="http://www.spicefactory.org/parsley">
+	<s:layout>
+		<s:VerticalLayout/>
+	</s:layout>
+	<fx:Script>
+		<![CDATA[
+			import model.loginModel;
+			
+			import mx.collections.ArrayCollection;
+			[Inject]
+			[Bindable]
+			public var loginmodel:loginModel;
+			[Inject]
+			[Bindable]
+			public var loginpm:loginPM;
+			protected function button1_clickHandler(event:MouseEvent):void
+			{
+				loginmodel.flowChartDP.removeAll();	
+
+				loginpm.login(username.text, password.text);
+								
+				loginmodel.flowChartDP.addItem("1. Submit button clicked");
+			}
+		]]>
+	</fx:Script>
+
+	<fx:Declarations>
+		<spicefactory:Configure/>
+	</fx:Declarations>
+	<s:Panel title="Login example" horizontalCenter="0" verticalCenter="0">
+		<mx:Form>
+			<mx:FormItem label="Username:">
+				<s:TextInput text="{loginmodel.username}" id="username"/>
+			</mx:FormItem>
+			<mx:FormItem label="Password:">
+				<s:TextInput text="{loginmodel.password}" id="password"/>
+			</mx:FormItem>
+			<s:Button label="Submit" click="button1_clickHandler(event)" buttonMode="true"/>
+		</mx:Form>	
+	</s:Panel>
+	<s:Label text="Username = 'username', Password = 'password'" />
+</s:Group>
